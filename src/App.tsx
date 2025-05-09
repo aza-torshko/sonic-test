@@ -3,8 +3,6 @@ import SonicPic from './images/sonic.png';
 import SonicRing from './images/sonicRing.png';
 import './App.css';
 import { SonicCard } from './components/sonicCard';
-import { RingCounter } from './components/ringCounter';
-import ZoneSelector from './components/zoneSelector';
 import ZoneEntryForm from './components/zoneEntryForm';
 
 function App() {
@@ -16,7 +14,8 @@ function App() {
   };
   const [count, setCount] = useState(0);
   const handleClick = () => {
-    setCount((prev) => prev + 1);}
+    setCount((prev) => prev + 1);
+  }
 
   return (
     <div className="App">
