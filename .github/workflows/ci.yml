@@ -54,7 +54,8 @@ jobs:
             npx wait-on http://localhost:3001
         - name: Run Playwright tests (Python)
           run: |
-            pytest playwright-python/ --maxfail=1 --disable-warnings -q
+            rm -rf playwright-report/
+            pytest playwright-python/ --html=playwright-report/report.html --self-contained-html --maxfail=1 --disable-warnings -q
         - name: Upload Playwright HTML report
           if: always()
           uses: actions/upload-artifact@v4
