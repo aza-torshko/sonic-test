@@ -6,7 +6,6 @@ import { RingCounter } from './components/ringCounter';
 import { ZoneSelector } from './components/zoneSelector';
 function App() {
   const [zone, setZone] = useState('');
-  const [speed, setSpeed] = useState(50);
   return (
     <div className="App">
       <h1>This is SONIC</h1>
