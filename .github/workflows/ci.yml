@@ -46,6 +46,8 @@ jobs:
         - name: Install Playwright dependencies
           run: |
             python -m playwright install
+        - name : Install Serve
+          run: npm install -g serve
         - name: Start React app on localhost:3001
           run: |
             npm ci
