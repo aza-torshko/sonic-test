@@ -46,6 +46,12 @@ jobs:
         - name: Install Playwright dependencies
           run: |
             python -m playwright install
+        - name: Start React app on localhost:3001
+          run: |
+            npm ci
+            npm run build
+            npm serve -s build -l 3001 &
+            npx wait-on http://localhost:3001
         - name: Run Playwright tests (Python)
           run: |
             pytest playwright-python/ --maxfail=1 --disable-warnings -q
