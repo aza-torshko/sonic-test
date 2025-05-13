@@ -27,7 +27,7 @@ jobs:
         # - name: Install Playwright browsers
         #   run: npx playwright install --with-deps
         - name: Run Storybook tests
-          run: npm run test-storybook --url http://localhost:6006
+          run: npx run test-storybook --url http://localhost:6006
 
   playwright-tests:
     name: Playwright E2E Tests
