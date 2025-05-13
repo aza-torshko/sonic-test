@@ -9,25 +9,23 @@ jobs:
     name: Storybook Component Tests
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
-        - name: Install dependencies
-          run: npm ci
-        - name: Build Storybook
-          run: npm run build-storybook
-        # - name: List storybook static content
-        #   run: ls -la storybook-static
-        - name: Serve Storybook
-          run: |
-            npx http-server storybook-static --port 6006 & sleep 5
-        # - name: Install Playwright browsers
-        #   run: npx playwright install --with-deps
-        - name: Run Storybook tests
-          run: npx run test-storybook --url http://localhost:6006
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: yarn
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Build Storybook
+        run: yarn build-storybook --quiet
+      - name: Serve Storybook and run tests
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on tcp:6006 && yarn test-storybook"
 
   playwright-tests:
     name: Playwright E2E Tests
